@@ -1,3 +1,72 @@
 /* You can add global styles to this file, and also import other style files */
 
-@import "tailwindcss";
+@import '@fontsource-variable/nunito-sans';
+@import 'tailwindcss';
+@plugin "daisyui" {
+  themes: false;
+}
+
+@plugin "daisyui/theme" {
+  name: 'teig';
+  default: true;
+  color-scheme: light;
+  --color-base-100: #ffffff;
+  --color-base-200: #f3f5f9;
+  --color-base-300: #d5d9e3;
+  --color-base-content: #14213d;
+  --color-primary: #c2410c;
+  --color-primary-content: #ffffff;
+  --color-secondary: #0e7c86;
+  --color-secondary-content: #ffffff;
+  --color-accent: #ffd23f;
+  --color-accent-content: #14213d;
+  --color-neutral: #14213d;
+  --color-neutral-content: #ffffff;
+  --radius-field: 0.5rem;
+  --radius-box: 0.75rem;
+  --border: 2px;
+  --depth: 0;
+  --noise: 0;
+}
+
+@theme {
+  --font-sans: 'Nunito Sans Variable', ui-sans-serif, system-ui, sans-serif;
+  --color-unidad: #0e7c86;
+  --color-ods: #ffd23f;
+  --color-tinta: #14213d;
+  --color-tinta-suave: #4a5470;
+  --color-naranja: #c2410c;
+  --color-naranja-oscuro: #9a3412;
+  --color-linea: #d5d9e3;
+  --color-campo: #8a93a8;
+  --color-marcador: #5b6582;
+
+  /* Al cambiar de pestaña, el formulario se asienta: el único momento de movimiento. */
+  --animate-asentar: asentar 280ms cubic-bezier(0.16, 1, 0.3, 1);
+  @keyframes asentar {
+    from {
+      opacity: 0.4;
+      transform: translateY(6px);
+    }
+  }
+}
+
+html {
+  font-family: var(--font-sans);
+  color: var(--color-tinta);
+  background: #ffffff;
+  caret-color: var(--color-naranja);
+  accent-color: var(--color-naranja);
+  /* Reserva el espacio de la barra de scroll para que la página no se mueva de lado. */
+  scrollbar-gutter: stable;
+  -webkit-font-smoothing: antialiased;
+}
+::selection {
+  background: var(--color-ods);
+  color: var(--color-tinta);
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-tinta);
+  outline-offset: 2px;
+}

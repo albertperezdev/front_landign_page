@@ -1,0 +1,279 @@
+<header class="bg-unidad text-white">
+  <div class="mx-auto flex max-w-7xl items-center gap-4 px-4 py-5 sm:gap-6 sm:px-8 sm:py-6">
+    <div
+      class="flex size-16 shrink-0 flex-col items-center justify-center rounded-lg bg-ods text-tinta sm:size-20"
+      role="img"
+      aria-label="Objetivo de Desarrollo Sostenible 5"
+    >
+      <span class="text-xs font-extrabold tracking-wide" aria-hidden="true">ODS</span>
+      <span class="text-3xl leading-none font-black sm:text-4xl" aria-hidden="true">5</span>
+    </div>
+    <div>
+      <p class="text-2xl font-black sm:text-3xl">TEIG</p>
+      <p class="text-sm sm:text-lg">Tecnología Educativa para la Igualdad de Género</p>
+    </div>
+  </div>
+</header>
+
+<main
+  class="mx-auto grid w-full max-w-7xl flex-1 content-start items-start gap-10 px-4 py-8 sm:px-8 lg:grid-cols-[minmax(0,1fr)_35rem] lg:gap-20 lg:py-14"
+>
+  <section class="order-2 lg:order-1 lg:pt-4" aria-labelledby="intro-titulo">
+    <h1
+      id="intro-titulo"
+      class="text-3xl font-black text-balance sm:text-4xl lg:text-5xl lg:leading-tight"
+    >
+      Aprende sobre igualdad de género
+    </h1>
+    <p class="mt-5 max-w-[60ch] text-lg leading-relaxed text-tinta-suave">
+      TEIG reúne información clara y sencilla para que toda la comunidad escolar conozca y reconozca
+      que todas las personas merecen las mismas oportunidades y el mismo respeto, sin importar su
+      género.
+    </p>
+
+    <aside class="mt-10 max-w-xl overflow-hidden rounded-xl border-2 border-tinta">
+      <h2 class="bg-naranja px-5 py-2.5 text-base font-extrabold text-white">Para saber más</h2>
+      <p class="px-5 py-4 leading-relaxed">
+        El Objetivo de Desarrollo Sostenible 5 de las Naciones Unidas busca lograr la igualdad entre
+        los géneros y empoderar a todas las mujeres y las niñas.
+      </p>
+    </aside>
+  </section>
+
+  <section
+    class="order-1 rounded-xl border-2 border-tinta p-5 sm:p-8 lg:order-2"
+    aria-labelledby="acceso-titulo"
+  >
+    <div class="flex items-center gap-3">
+      <span
+        class="flex size-9 shrink-0 items-center justify-center rounded-md bg-tinta text-lg font-black text-white"
+        aria-hidden="true"
+        >1</span
+      >
+      <h2 id="acceso-titulo" class="text-2xl font-black">Entra a TEIG</h2>
+    </div>
+
+    <div
+      class="relative mt-6 grid grid-cols-2 border-b-2 border-linea"
+      role="tablist"
+      aria-label="Acceso a la cuenta"
+      (keydown)="teclaPestanas($event)"
+    >
+      <button
+        id="tab-login"
+        type="button"
+        role="tab"
+        class="cursor-pointer px-2 py-3.5 font-extrabold text-tinta-suave transition-colors duration-200 ease-out hover:text-tinta aria-selected:text-tinta"
+        [attr.aria-selected]="pestana() === 'login'"
+        aria-controls="panel-login"
+        [attr.tabindex]="pestana() === 'login' ? 0 : -1"
+        (click)="elegir('login')"
+      >
+        Iniciar sesión
+      </button>
+      <button
+        id="tab-registro"
+        type="button"
+        role="tab"
+        class="cursor-pointer px-2 py-3.5 font-extrabold text-tinta-suave transition-colors duration-200 ease-out hover:text-tinta aria-selected:text-tinta"
+        [attr.aria-selected]="pestana() === 'registro'"
+        aria-controls="panel-registro"
+        [attr.tabindex]="pestana() === 'registro' ? 0 : -1"
+        (click)="elegir('registro')"
+      >
+        Crear cuenta
+      </button>
+      <span
+        class="absolute -bottom-0.5 left-0 h-1 w-1/2 rounded-xs bg-naranja transition-transform duration-[320ms] ease-[cubic-bezier(0.16,1,0.3,1)] motion-reduce:transition-none"
+        [class.translate-x-full]="pestana() === 'registro'"
+        aria-hidden="true"
+      ></span>
+    </div>
+
+    <form
+      id="panel-login"
+      class="flex animate-asentar flex-col gap-5 pt-6 motion-reduce:animate-none"
+      role="tabpanel"
+      aria-labelledby="tab-login"
+      [hidden]="pestana() !== 'login'"
+      (submit)="iniciarSesion($event)"
+    >
+      <p class="text-tinta-suave">Te damos la bienvenida. Entra con tu correo electrónico.</p>
+
+      <div>
+        <label class="mb-2 block font-extrabold" for="login-correo">Correo electrónico</label>
+        <input
+          id="login-correo"
+          class="h-12 w-full rounded-lg border-2 border-campo bg-white px-4 text-tinta transition-colors duration-150 ease-out placeholder:text-marcador hover:border-tinta-suave focus:border-tinta"
+          name="correo"
+          type="email"
+          autocomplete="email"
+          inputmode="email"
+          placeholder="nombre@correo.com"
+          required
+        />
+      </div>
+
+      <div>
+        <label class="mb-2 block font-extrabold" for="login-clave">Contraseña</label>
+        <div class="relative">
+          <input
+            id="login-clave"
+            class="h-12 w-full rounded-lg border-2 border-campo bg-white px-4 text-tinta transition-colors duration-150 ease-out placeholder:text-marcador hover:border-tinta-suave focus:border-tinta pr-24"
+            name="clave"
+            [type]="verClaveLogin() ? 'text' : 'password'"
+            autocomplete="current-password"
+            required
+          />
+          <button
+            type="button"
+            class="absolute top-1/2 right-1.5 -translate-y-1/2 cursor-pointer rounded-md px-3 py-2 text-sm/normal font-extrabold text-tinta hover:bg-base-200"
+            aria-controls="login-clave"
+            (click)="verClaveLogin.set(!verClaveLogin())"
+          >
+            {{ verClaveLogin() ? 'Ocultar' : 'Mostrar' }}
+          </button>
+        </div>
+      </div>
+
+      @if (errorLogin()) {
+        <p
+          class="rounded-lg border-2 border-naranja bg-naranja/10 px-4 py-3 font-bold text-naranja-oscuro"
+          role="alert"
+        >
+          {{ errorLogin() }}
+        </p>
+      }
+
+      <p class="text-sm/normal text-tinta-suave">
+        ¿Olvidaste tu contraseña? La recuperación estará disponible próximamente.
+      </p>
+
+      <button
+        type="submit"
+        class="h-14 cursor-pointer rounded-lg bg-naranja text-lg/normal font-black text-white transition-colors duration-150 ease-out hover:bg-naranja-oscuro active:translate-y-px disabled:cursor-wait disabled:opacity-70"
+        [disabled]="enviando()"
+      >
+        {{ enviando() ? 'Entrando…' : 'Iniciar sesión' }}
+      </button>
+
+      <p class="text-tinta-suave">
+        ¿Aún no tienes cuenta?
+        <button
+          type="button"
+          class="cursor-pointer font-extrabold text-tinta underline decoration-2 underline-offset-3 hover:decoration-[3px]"
+          (click)="elegir('registro', true)"
+        >
+          Crea una
+        </button>
+      </p>
+    </form>
+    <form
+      id="panel-registro"
+      class="flex animate-asentar flex-col gap-5 pt-6 motion-reduce:animate-none"
+      role="tabpanel"
+      aria-labelledby="tab-registro"
+      [hidden]="pestana() !== 'registro'"
+      (submit)="crearCuenta($event)"
+    >
+      <p class="text-tinta-suave">Crea tu cuenta para empezar a aprender.</p>
+
+      <div>
+        <label class="mb-2 block font-extrabold" for="registro-nombre">Nombre</label>
+        <input
+          id="registro-nombre"
+          class="h-12 w-full rounded-lg border-2 border-campo bg-white px-4 text-tinta transition-colors duration-150 ease-out placeholder:text-marcador hover:border-tinta-suave focus:border-tinta"
+          name="nombre"
+          type="text"
+          autocomplete="name"
+          maxlength="100"
+          required
+        />
+      </div>
+
+      <div>
+        <label class="mb-2 block font-extrabold" for="registro-correo">Correo electrónico</label>
+        <input
+          id="registro-correo"
+          class="h-12 w-full rounded-lg border-2 border-campo bg-white px-4 text-tinta transition-colors duration-150 ease-out placeholder:text-marcador hover:border-tinta-suave focus:border-tinta"
+          name="correo"
+          type="email"
+          autocomplete="email"
+          inputmode="email"
+          placeholder="nombre@correo.com"
+          required
+        />
+      </div>
+
+      <div>
+        <label class="mb-2 block font-extrabold" for="registro-clave">Contraseña</label>
+        <div class="relative">
+          <input
+            id="registro-clave"
+            class="h-12 w-full rounded-lg border-2 border-campo bg-white px-4 text-tinta transition-colors duration-150 ease-out placeholder:text-marcador hover:border-tinta-suave focus:border-tinta pr-24"
+            name="clave"
+            [type]="verClaveRegistro() ? 'text' : 'password'"
+            autocomplete="new-password"
+            minlength="8"
+            maxlength="128"
+            aria-describedby="registro-clave-ayuda"
+            required
+          />
+          <button
+            type="button"
+            class="absolute top-1/2 right-1.5 -translate-y-1/2 cursor-pointer rounded-md px-3 py-2 text-sm/normal font-extrabold text-tinta hover:bg-base-200"
+            aria-controls="registro-clave"
+            (click)="verClaveRegistro.set(!verClaveRegistro())"
+          >
+            {{ verClaveRegistro() ? 'Ocultar' : 'Mostrar' }}
+          </button>
+        </div>
+        <p id="registro-clave-ayuda" class="mt-2 text-sm/normal text-tinta-suave">
+          Usa al menos 8 caracteres, con una mayúscula, una minúscula y un número.
+        </p>
+      </div>
+
+      <div>
+        <label class="mb-2 block font-extrabold" for="registro-confirmar"
+          >Confirma la contraseña</label
+        >
+        <input
+          id="registro-confirmar"
+          class="h-12 w-full rounded-lg border-2 border-campo bg-white px-4 text-tinta transition-colors duration-150 ease-out placeholder:text-marcador hover:border-tinta-suave focus:border-tinta"
+          name="confirmar"
+          [type]="verClaveRegistro() ? 'text' : 'password'"
+          autocomplete="new-password"
+          required
+        />
+      </div>
+
+      @if (errorRegistro()) {
+        <p
+          class="rounded-lg border-2 border-naranja bg-naranja/10 px-4 py-3 font-bold text-naranja-oscuro"
+          role="alert"
+        >
+          {{ errorRegistro() }}
+        </p>
+      }
+
+      <button
+        type="submit"
+        class="h-14 cursor-pointer rounded-lg bg-naranja text-lg/normal font-black text-white transition-colors duration-150 ease-out hover:bg-naranja-oscuro active:translate-y-px disabled:cursor-wait disabled:opacity-70"
+        [disabled]="enviando()"
+      >
+        {{ enviando() ? 'Creando cuenta…' : 'Crear cuenta' }}
+      </button>
+
+      <p class="text-tinta-suave">
+        ¿Ya tienes cuenta?
+        <button
+          type="button"
+          class="cursor-pointer font-extrabold text-tinta underline decoration-2 underline-offset-3 hover:decoration-[3px]"
+          (click)="elegir('login', true)"
+        >
+          Inicia sesión
+        </button>
+      </p>
+    </form>
+  </section>
+</main>
